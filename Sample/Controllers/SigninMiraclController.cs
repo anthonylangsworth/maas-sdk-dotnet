@@ -20,7 +20,7 @@ namespace WebApplication4.Controllers
             {
                 return View("Error");
             }
-            
+
             IdentityModel.Client.TokenResponse response = await HomeController.Client.ValidateAuthorization(Request.QueryString);
             if (response != null)
             {
@@ -37,9 +37,11 @@ namespace WebApplication4.Controllers
                 ViewBag.AccessTokenParsed = ParseJwt(response.AccessToken);
             }
 
+            ViewBag.Client = HomeController.Client;
+
             return View(response);
         }
-        
+
         private string ParseJwt(string token)
         {
             if (!token.Contains("."))
