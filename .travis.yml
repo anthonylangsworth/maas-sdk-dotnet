@@ -30,7 +30,8 @@ before_install:
 install:
   - nuget restore Authentication.sln
   - nuget install NUnit.Runners -Version 3.4.1 -OutputDirectory target
+  - nuget install OpenCover -Version 4.6.519 -OutputDirectory target
 
 script:
   - xbuild /p:Configuration=Release Authentication.sln
-  - mono ./target/NUnit.ConsoleRunner.3.4.1/tools/nunit3-console.exe ./MiraclAuthenticationTests/bin/Release/MiraclAuthenticationTests.dll
+  - mono target/OpenCover.4.6.519/tools/OpenCover.Console.exe -target:"./target/NUnit.ConsoleRunner.3.4.1/tools/nunit3-console.exe" -targetargs:"./MiraclAuthenticationTests/bin/Release/MiraclAuthenticationTests.dll" -register:user
